@@ -1,0 +1,22 @@
+{
+  "name": "handrecognitiontiktok",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaduAlbastroiu/HandRecognitionTikTok.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaduAlbastroiu/HandRecognitionTikTok/issues"
+  },
+  "homepage": "https://github.com/RaduAlbastroiu/HandRecognitionTikTok#readme",
+  "dependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
