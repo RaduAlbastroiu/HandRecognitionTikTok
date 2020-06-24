@@ -1,4 +1,4 @@
-const { cv } = require('../utils');
+const cv = require('opencv4nodejs');
 
 const { runVideoFaceDetection } = require('./commons');
 
