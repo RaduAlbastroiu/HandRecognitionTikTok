@@ -1,8 +1,4 @@
-let test = require('./SimpleHandGestureRecognition/handGestureRecognition');
-
-//require('./facedetection/faceDetect/webcamFaceDetection');
-
-require('./facedetection/faceDetect/videoFaceDetection');
+require('./opencv4nodejs/facedetection/faceDetect/videoFaceDetection');
 
 let cv = require('opencv4nodejs');
 
