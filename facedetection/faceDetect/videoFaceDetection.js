@@ -17,4 +17,19 @@ function detectFaces(img) {
   return classifier.detectMultiScale(img.bgrToGray(), options).objects;
 }
 
-runVideoFaceDetection(videoFile, detectFaces);
+let array_images = [];
+runVideoFaceDetection(videoFile, detectFaces, array_images);
+
+let out = new cv.VideoWriter(
+  'project.mp4',
+  cv.VideoWriter.fourcc('DIVX'),
+  15,
+  new cv.Size(800, 800)
+);
+
+console.log('HERE');
+array_images.forEach((element) => {
+  out.write(element);
+});
+console.log('HERE 2');
+out.release();

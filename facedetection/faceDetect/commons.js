@@ -3,7 +3,7 @@ const { grabFrames, drawBlueRect } = require('../utils');
 const loadFacenet = require('../dnn/loadFacenet');
 const { extractResults } = require('../dnn/ssdUtils');
 
-exports.runVideoFaceDetection = (src, detectFaces) =>
+exports.runVideoFaceDetection = (src, detectFaces, array_images) =>
   grabFrames(src, 1, (frame) => {
     console.time('detection time');
     const frameResized = frame.resizeToMax(800);
@@ -16,7 +16,8 @@ exports.runVideoFaceDetection = (src, detectFaces) =>
     }
 
     cv.imshow('face', frameResized);
-    console.timeEnd('detection time');
+    array_images.push(frameResized);
+    //console.timeEnd('detection time');
   });
 
 function classifyImg(net, img) {
