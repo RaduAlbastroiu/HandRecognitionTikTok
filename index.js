@@ -1,4 +1,10 @@
 let test = require('./SimpleHandGestureRecognition/handGestureRecognition');
-let displayImage = require('./test/opencvsetup');
 
-displayImage();
+require('./webcamfacedetection/faceDetect/webcamFaceDetection');
+
+/*
+let cv = require('opencv4nodejs');
+
+let img = cv.imread('pug.png');
+cv.imwrite('img.png', img);
+*/

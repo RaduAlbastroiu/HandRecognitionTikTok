@@ -15,7 +15,7 @@ exports.runVideoFaceDetection = (src, detectFaces) =>
       faceRects.forEach((faceRect) => drawBlueRect(frameResized, faceRect));
     }
 
-    cv.imshow('face detection', frameResized);
+    cv.imwrite('face.png', frameResized);
     console.timeEnd('detection time');
   });
 
