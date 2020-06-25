@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/RaduAlbastroiu/HandRecognitionTikTok#readme",
   "dependencies": {
+    "@tensorflow-models/handpose": "0.0.5",
     "nodemon": "^2.0.4",
     "opencv4nodejs": "^5.6.0"
   }
