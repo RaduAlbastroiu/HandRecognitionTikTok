@@ -14,8 +14,6 @@ async function main() {
     document.querySelector('video')
   );
 
-  console.log('Length');
-  console.log(predictions.length);
   if (predictions.length > 0) {
     console.log('Length');
     console.log(predictions.length);
@@ -35,7 +33,8 @@ async function main() {
 function App() {
   useEffect(() => {
     console.log('mounted');
-    main();
+    let timerId = setInterval(() => main(), 2000);
+    //main();
   }, []);
 
   return (
