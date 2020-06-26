@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { CameraFeed } from './CameraFeed';
 
 const handpose = require('@tensorflow-models/handpose');
 const test_img = require('./test_img.png');
@@ -9,7 +10,9 @@ async function main() {
   console.log('HERE');
 
   // provide img / video
-  const predictions = await model.estimateHands(document.querySelector('img'));
+  const predictions = await model.estimateHands(
+    document.querySelector('video')
+  );
 
   console.log('Length');
   console.log(predictions.length);
@@ -39,7 +42,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Test</h1>
-        <img src={test_img}></img>
+        <CameraFeed></CameraFeed>
       </header>
     </div>
   );
