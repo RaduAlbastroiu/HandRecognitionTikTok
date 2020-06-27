@@ -3,6 +3,7 @@ import { CameraFeed } from './CameraFeed';
 
 const handpose = require('@tensorflow-models/handpose');
 const test_img = require('./test_img.png');
+let number = 0;
 
 async function main() {
   const model = await handpose.load();
@@ -15,9 +16,8 @@ async function main() {
   );
 
   if (predictions.length > 0) {
-    console.log('Length');
-    console.log(predictions.length);
-
+    number++;
+    console.log(number);
     for (let i = 0; i < predictions.length; i++) {
       const keypoints = predictions[i].landmarks;
 
@@ -33,8 +33,7 @@ async function main() {
 function App() {
   useEffect(() => {
     console.log('mounted');
-    let timerId = setInterval(() => main(), 2000);
-    //main();
+    let timerId = setInterval(() => main(), 50);
   }, []);
 
   return (
