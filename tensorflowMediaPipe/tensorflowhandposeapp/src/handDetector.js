@@ -4,6 +4,7 @@ const {
   getColNames63,
   getColNamesConverted,
   handKeyPointsConverter,
+  getFingersUp,
 } = require('./handKeyPointsConverter');
 let model = null;
 let number = 0;
@@ -41,14 +42,16 @@ export async function handDetector() {
       }
     }
 
+    //getFingersUp(handRowData);
+
     handKeyPointsData.push(handRowData);
 
     // export csv
-    if (number == 10) {
+    if (number == 5) {
       console.log('Download Csv');
 
       let colnames = getColNamesConverted();
-      let convertedFeatures = handKeyPointsConverter();
+      let convertedFeatures = handKeyPointsConverter(handKeyPointsData);
 
       downloadCsv(colnames, convertedFeatures);
     }
