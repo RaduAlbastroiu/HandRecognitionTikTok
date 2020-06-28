@@ -37,11 +37,11 @@ const littleStartFinger = 17;
  * results in only 14 data points (features)
  */
 
-export function handKeyPointsConverter(handKeyPointsData) {
+export function handKeyPointsConverter(handKeyPointsData, handPose) {
   let convertedFeatures = [];
 
   handKeyPointsData.forEach((dataRow) => {
-    let convertedRow = [];
+    let convertedRow = [handPose];
 
     // distance
     let fingerTipPoints = getFingerTipPoints(dataRow);
@@ -77,6 +77,7 @@ export function handKeyPointsConverter(handKeyPointsData) {
 // the 14 features names
 export function getColNamesConverted() {
   return [
+    'HandPose',
     'D1-2',
     'D2-3',
     'D3-4',

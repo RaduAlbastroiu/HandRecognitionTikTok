@@ -47,11 +47,14 @@ export async function handDetector() {
     handKeyPointsData.push(handRowData);
 
     // export csv
-    if (number == 5) {
+    if (number == 200) {
       console.log('Download Csv');
 
       let colnames = getColNamesConverted();
-      let convertedFeatures = handKeyPointsConverter(handKeyPointsData);
+      let convertedFeatures = handKeyPointsConverter(
+        handKeyPointsData,
+        'Vulcan'
+      );
 
       downloadCsv(colnames, convertedFeatures);
     }
