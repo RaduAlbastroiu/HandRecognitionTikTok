@@ -1,6 +1,10 @@
 const handpose = require('@tensorflow-models/handpose');
 const { downloadCsv } = require('./downloadCsv');
-const { getColNames63 } = require('./handKeyPointsConverter');
+const {
+  getColNames63,
+  getColNamesConverted,
+  handKeyPointsConverter,
+} = require('./handKeyPointsConverter');
 let model = null;
 let number = 0;
 
@@ -43,9 +47,10 @@ export async function handDetector() {
     if (number == 10) {
       console.log('Download Csv');
 
-      let colnames = getColNames63();
+      let colnames = getColNamesConverted();
+      let convertedFeatures = handKeyPointsConverter();
 
-      downloadCsv(colnames, handData);
+      downloadCsv(colnames, convertedFeatures);
     }
   }
 }

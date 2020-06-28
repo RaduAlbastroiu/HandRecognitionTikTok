@@ -21,7 +21,7 @@ function writeCsv() {
 function App() {
   useEffect(() => {
     console.log('mounted');
-    let timerId = setInterval(() => handDetector(), 50);
+    let timerId = setInterval(() => handDetector(), 500);
     /*downloadCsv(
       ['d', 'gicu', 'x'],
       [
