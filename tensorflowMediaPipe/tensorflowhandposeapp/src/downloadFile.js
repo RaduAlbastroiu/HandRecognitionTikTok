@@ -16,13 +16,18 @@ function buildFileContent(colNames, rows) {
 }
 
 export function downloadCsv(colNames, rows) {
+  let content = buildFileContent(colNames, rows);
+  downloadFile(content, 'data.csv');
+}
+
+export function downloadFile(content, name) {
   const element = document.createElement('a');
-  const file = new Blob([buildFileContent(colNames, rows)], {
+  const file = new Blob([content], {
     type: 'text/plain',
   });
   element.href = URL.createObjectURL(file);
-  element.download = 'data.csv';
+  element.download = name;
   document.body.appendChild(element);
   element.click();
-  console.log('Exported data');
+  console.log('Exported file');
 }
