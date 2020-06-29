@@ -4,7 +4,10 @@ import { handDetector } from './handDetector';
 import { downloadCsv } from './downloadFile';
 import { testSvm } from './svm/testsvm';
 
-import { loadRandomForest } from './randomforest/randomForest';
+import {
+  testRandomForest,
+  loadRandomForest,
+} from './randomforest/randomForest';
 
 function writeCsv() {
   console.log('plm');
@@ -24,8 +27,8 @@ function writeCsv() {
 function App() {
   useEffect(() => {
     console.log('mounted');
-    //testRandomForest();
-    loadRandomForest();
+    testRandomForest();
+    //loadRandomForest();
     //let timerId = setInterval(() => handDetector(true), 250);
   }, []);
 

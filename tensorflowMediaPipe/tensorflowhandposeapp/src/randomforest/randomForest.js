@@ -1,13 +1,28 @@
 import { RandomForestClassifier as RFClassifier } from 'ml-random-forest';
 import { downloadFile } from '../downloadFile';
-import alldata from './alldata.csv';
+import alldata from './alldata.json';
+import model from './model.json';
 
-/*
+const Classes = [
+  'Fist',
+  'ThumbsUp',
+  'ThumbsDown',
+  'Palm',
+  'Victory',
+  'CrossFingers',
+  'OK',
+  'Call',
+  'Vulcan',
+];
+
 export function testRandomForest() {
-  var trainingSet = IrisDataset.getNumbers();
-  var predictions = IrisDataset.getClasses().map((elem) =>
-    IrisDataset.getDistinctClasses().indexOf(elem)
-  );
+  var trainingSet = alldata.map((rowData) => rowData.slice(1, 10));
+  var predictions = alldata
+    .map((rowData) => rowData[0])
+    .map((clasifier) => Classes.indexOf(clasifier));
+
+  console.log(trainingSet);
+  console.log(predictions);
 
   var options = {
     seed: 3,
@@ -20,8 +35,8 @@ export function testRandomForest() {
   classifier.train(trainingSet, predictions);
 
   let json = classifier.toJSON();
-  console.log(JSON.stringify(json));
-  //downloadFile(JSON.stringify(json), 'model.json');
+  //console.log(JSON.stringify(json));
+  downloadFile(JSON.stringify(json), 'model.json');
 
   var result = classifier.predict(trainingSet);
 
@@ -37,18 +52,15 @@ export function testRandomForest() {
   let accuracy = (matching / predictions.length) * 100;
   console.log('Accuracy: ' + accuracy + '% out of ' + predictions.length);
 }
-*/
 
 export function loadRandomForest() {
-  console.log(alldata);
-  /*
-  var trainingSet = IrisDataset.getNumbers();
-  var predictions = IrisDataset.getClasses().map((elem) =>
-    IrisDataset.getDistinctClasses().indexOf(elem)
-  );
+  var trainingSet = alldata.map((rowData) => rowData.slice(1, 10));
+  var predictions = alldata
+    .map((rowData) => rowData[0])
+    .map((clasifier) => Classes.indexOf(clasifier));
 
-  console.log('FROM LOAD');
-  console.log(model);
+  console.log(trainingSet);
+  console.log(predictions);
 
   let classifier = RFClassifier.load(model);
   var result = classifier.predict(trainingSet);
@@ -64,5 +76,4 @@ export function loadRandomForest() {
 
   let accuracy = (matching / predictions.length) * 100;
   console.log('Accuracy: ' + accuracy + '% out of ' + predictions.length);
-  */
 }
