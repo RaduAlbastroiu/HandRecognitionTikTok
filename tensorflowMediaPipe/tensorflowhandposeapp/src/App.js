@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { CameraFeed } from './CameraFeed';
 import { handDetector } from './handDetector';
 import { downloadCsv } from './downloadCsv';
+import { testSvm } from './svm/testsvm';
 
 function writeCsv() {
   console.log('plm');
@@ -21,7 +22,8 @@ function writeCsv() {
 function App() {
   useEffect(() => {
     console.log('mounted');
-    let timerId = setInterval(() => handDetector(false), 250);
+    testSvm();
+    //let timerId = setInterval(() => handDetector(false), 250);
   }, []);
 
   return (
