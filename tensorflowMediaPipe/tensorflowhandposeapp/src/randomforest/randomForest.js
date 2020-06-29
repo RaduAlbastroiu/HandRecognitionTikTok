@@ -1,8 +1,8 @@
-import IrisDataset from 'ml-dataset-iris';
 import { RandomForestClassifier as RFClassifier } from 'ml-random-forest';
 import { downloadFile } from '../downloadFile';
-import model from './testModel.json';
+import alldata from './alldata.csv';
 
+/*
 export function testRandomForest() {
   var trainingSet = IrisDataset.getNumbers();
   var predictions = IrisDataset.getClasses().map((elem) =>
@@ -37,8 +37,11 @@ export function testRandomForest() {
   let accuracy = (matching / predictions.length) * 100;
   console.log('Accuracy: ' + accuracy + '% out of ' + predictions.length);
 }
+*/
 
 export function loadRandomForest() {
+  console.log(alldata);
+  /*
   var trainingSet = IrisDataset.getNumbers();
   var predictions = IrisDataset.getClasses().map((elem) =>
     IrisDataset.getDistinctClasses().indexOf(elem)
@@ -61,4 +64,5 @@ export function loadRandomForest() {
 
   let accuracy = (matching / predictions.length) * 100;
   console.log('Accuracy: ' + accuracy + '% out of ' + predictions.length);
+  */
 }
