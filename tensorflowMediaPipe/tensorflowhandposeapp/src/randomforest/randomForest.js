@@ -77,3 +77,10 @@ export function loadRandomForest() {
   let accuracy = (matching / predictions.length) * 100;
   console.log('Accuracy: ' + accuracy + '% out of ' + predictions.length);
 }
+
+export function predictRandomForest(data) {
+  let classifier = RFClassifier.load(model);
+  var result = classifier.predict(data);
+  console.log('Hand position: ', Classes[result[0]]);
+  return result[0];
+}

@@ -4,8 +4,10 @@ const {
   getColNames63,
   getColNamesConverted,
   handKeyPointsConverter,
+  handKeyPointsConverterRow,
   getFingersUp,
 } = require('./handKeyPointsConverter');
+const { predictRandomForest } = require('./randomforest/randomForest');
 let model = null;
 let number = 0;
 
@@ -38,9 +40,12 @@ export async function handDetector(generateCsv) {
         handRowData.push(x);
         handRowData.push(y);
         handRowData.push(z);
-        console.log(`Keypoint ${i}: [${x}, ${y}, ${z}]`);
+        //console.log(`Keypoint ${i}: [${x}, ${y}, ${z}]`);
       }
     }
+
+    let convertedData = handKeyPointsConverterRow(handRowData);
+    let result = predictRandomForest([convertedData]);
 
     if (generateCsv) {
       handKeyPointsData.push(handRowData);

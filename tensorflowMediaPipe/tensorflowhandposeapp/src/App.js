@@ -27,9 +27,9 @@ function writeCsv() {
 function App() {
   useEffect(() => {
     console.log('mounted');
-    testRandomForest();
+    //testRandomForest();
     //loadRandomForest();
-    //let timerId = setInterval(() => handDetector(true), 250);
+    let timerId = setInterval(() => handDetector(false), 500);
   }, []);
 
   return (

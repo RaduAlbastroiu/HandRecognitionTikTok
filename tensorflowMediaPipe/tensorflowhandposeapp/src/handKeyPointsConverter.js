@@ -7,6 +7,8 @@
  * node 20 - Little
  */
 
+import { arrayBufferToBase64String } from '@tensorflow/tfjs-core/dist/io/io_utils';
+
 const thumbnailFinger = 4;
 const indexFinger = 8;
 const middleFinger = 12;
@@ -37,38 +39,35 @@ const littleStartFinger = 17;
  * results in only 14 data points (features)
  */
 
+export function handKeyPointsConverterRow(dataRow) {
+  let convertedRow = [];
+
+  // distance
+  let fingerTipPoints = getFingerTipPoints(dataRow);
+
+  convertedRow.push(getDistance(fingerTipPoints[0], fingerTipPoints[1], true));
+  convertedRow.push(getDistance(fingerTipPoints[1], fingerTipPoints[2], true));
+  convertedRow.push(getDistance(fingerTipPoints[2], fingerTipPoints[3], true));
+  convertedRow.push(getDistance(fingerTipPoints[3], fingerTipPoints[4], true));
+
+  // up
+  let fingersUp = getFingersUp(dataRow);
+
+  // down
+  // if a finger is not up then it's down
+  //let fingersDown = fingersUp.map((val) => !val);
+  //convertedRow.push(fingersDown);
+
+  return convertedRow.concat(fingersUp);
+}
+
 export function handKeyPointsConverter(handKeyPointsData, handPose) {
   let convertedFeatures = [];
 
   handKeyPointsData.forEach((dataRow) => {
-    let convertedRow = [handPose];
+    let convertedRow = handKeyPointsConverterRow(dataRow);
 
-    // distance
-    let fingerTipPoints = getFingerTipPoints(dataRow);
-
-    convertedRow.push(
-      getDistance(fingerTipPoints[0], fingerTipPoints[1], true)
-    );
-    convertedRow.push(
-      getDistance(fingerTipPoints[1], fingerTipPoints[2], true)
-    );
-    convertedRow.push(
-      getDistance(fingerTipPoints[2], fingerTipPoints[3], true)
-    );
-    convertedRow.push(
-      getDistance(fingerTipPoints[3], fingerTipPoints[4], true)
-    );
-
-    // up
-    let fingersUp = getFingersUp(dataRow);
-    convertedRow.push(fingersUp);
-
-    // down
-    // if a finger is not up then it's down
-    //let fingersDown = fingersUp.map((val) => !val);
-    //convertedRow.push(fingersDown);
-
-    convertedFeatures.push(convertedRow);
+    convertedFeatures.push([handPose].concat(convertedRow));
   });
 
   return convertedFeatures;
@@ -131,13 +130,6 @@ export function getFingersUp(dataRow) {
   let indexUp =
     getDistance(palmPoint, fingerStartPoints[1], false) / 2 <
     getDistance(fingerStartPoints[1], fingerTipPoints[1], false);
-
-  /*
-  console.log('Dist palm to finger start');
-  console.log(getDistance(palmPoint, fingerStartPoints[1], false));
-  console.log('Dist finger start to finger end');
-  console.log(getDistance(fingerStartPoints[1], fingerTipPoints[1], false));
-*/
 
   let middleUp =
     getDistance(palmPoint, fingerStartPoints[2], false) / 2 <
