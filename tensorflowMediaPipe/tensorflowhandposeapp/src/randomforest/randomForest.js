@@ -81,6 +81,5 @@ export function loadRandomForest() {
 export function predictRandomForest(data) {
   let classifier = RFClassifier.load(model);
   var result = classifier.predict(data);
-  console.log('Hand position: ', Classes[result[0]]);
-  return result[0];
+  return Classes[result[0]];
 }

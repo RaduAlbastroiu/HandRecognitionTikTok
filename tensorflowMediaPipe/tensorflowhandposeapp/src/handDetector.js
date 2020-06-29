@@ -15,7 +15,7 @@ let number = 0;
 let handKeyPointsData = [];
 
 export async function handDetector(generateCsv) {
-  console.log('HERE');
+  console.log('Frame');
 
   // provide img / video
   if (model === null) {
@@ -31,6 +31,7 @@ export async function handDetector(generateCsv) {
 
     number++;
     console.log(number);
+
     for (let i = 0; i < predictions.length; i++) {
       const keypoints = predictions[i].landmarks;
 
@@ -43,9 +44,6 @@ export async function handDetector(generateCsv) {
         //console.log(`Keypoint ${i}: [${x}, ${y}, ${z}]`);
       }
     }
-
-    let convertedData = handKeyPointsConverterRow(handRowData);
-    let result = predictRandomForest([convertedData]);
 
     if (generateCsv) {
       handKeyPointsData.push(handRowData);
@@ -63,5 +61,10 @@ export async function handDetector(generateCsv) {
 
       downloadCsv(colnames, convertedFeatures);
     }
+
+    let convertedData = handKeyPointsConverterRow(handRowData);
+    let result = predictRandomForest([convertedData]);
+
+    return result;
   }
 }
