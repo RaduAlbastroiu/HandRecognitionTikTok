@@ -12,7 +12,7 @@ let number = 0;
 // store hand position data
 let handKeyPointsData = [];
 
-export async function handDetector() {
+export async function handDetector(generateCsv) {
   console.log('HERE');
 
   // provide img / video
@@ -42,12 +42,12 @@ export async function handDetector() {
       }
     }
 
-    //getFingersUp(handRowData);
-
-    handKeyPointsData.push(handRowData);
+    if (generateCsv) {
+      handKeyPointsData.push(handRowData);
+    }
 
     // export csv
-    if (number == 200) {
+    if (number == 200 && generateCsv) {
       console.log('Download Csv');
 
       let colnames = getColNamesConverted();
