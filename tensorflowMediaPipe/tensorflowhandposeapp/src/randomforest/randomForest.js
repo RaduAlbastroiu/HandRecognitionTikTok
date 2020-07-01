@@ -1,6 +1,6 @@
 import { RandomForestClassifier as RFClassifier } from 'ml-random-forest';
 import { downloadFile } from '../downloadFile';
-import alldata from './alldata.json';
+import alldata from './alldata2.json';
 import model from './model.json';
 
 const Classes = [
@@ -35,7 +35,7 @@ export function testRandomForest() {
   classifier.train(trainingSet, predictions);
 
   let json = classifier.toJSON();
-  //console.log(JSON.stringify(json));
+  console.log(JSON.stringify(json));
   downloadFile(JSON.stringify(json), 'model.json');
 
   var result = classifier.predict(trainingSet);

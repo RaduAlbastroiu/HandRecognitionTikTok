@@ -9,28 +9,70 @@ import {
   loadRandomForest,
 } from './randomforest/randomForest';
 
+const handGesturesOrder = [
+  'Fist',
+  'ThumbsUp',
+  'ThumbsDown',
+  'Palm',
+  'Victory',
+  'CrossFingers',
+  'OK',
+  'Call',
+  'Vulcan',
+];
+
+const handGesturesOrderEmoji = [
+  '👊',
+  '👍',
+  '👎',
+  '🖐',
+  '✌',
+  '🤞',
+  '👌',
+  '🤙',
+  '🖖',
+];
+
+let handGestureProgress = 0;
+let firstRun = true;
+
 function App() {
-  let [handGesture, setHandGesture] = React.useState('None');
+  let [handGesture, setHandGesture] = React.useState('');
 
   useEffect(() => {
     console.log('mounted');
     //testRandomForest();
     //loadRandomForest();
+
     let timerId = setInterval(async () => {
-      handGesture = await handDetector(false);
-      console.log(handGesture);
+      let handGest = await handDetector(false);
+
+      if (firstRun) {
+        setHandGesture('Start 👊');
+        firstRun = false;
+      }
+      console.log(handGest);
 
       // keep most recent hand gesture
-      if (handGesture) {
-        setHandGesture(handGesture);
+      if (handGest && handGest === handGesturesOrder[handGestureProgress]) {
+        handGestureProgress += 1;
+        if (handGestureProgress < 9) {
+          setHandGesture(
+            handGesturesOrderEmoji[handGestureProgress - 1] +
+              ' ✅ ➡ ' +
+              handGesturesOrderEmoji[handGestureProgress]
+          );
+        } else {
+          setHandGesture('🎉🔥💯');
+        }
       }
-    }, 500);
+    }, 350);
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>{handGesture}</h1>
+        <h1 style={{ marginLeft: 250 }}>{handGesture}</h1>
         <CameraFeed></CameraFeed>
       </header>
     </div>
